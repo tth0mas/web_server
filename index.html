@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="author" content="thomas" />
+  <title>Euclids Algorithm</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Euclids Algorithm</h1>
+<p class="author">thomas</p>
+<p class="date">October 2023</p>
+</header>
+<h1 class="unnumbered" id="introduction">Introduction</h1>
+<h1 class="unnumbered" id="the-greatest-common-divisor">The Greatest Common Divisor</h1>
+<p>The greatest common divisor is the largest integer which divides two numbers.</p>
+<blockquote>
+<p><span id="quote:def1" label="quote:def1">[quote:def1]</span> <strong>Definition 1</strong>: An integer <em>b</em> is said to be <em>divisible</em> by an integer <em>a</em> <span class="math inline">≠</span> 0, often expressed as <span class="math inline"><em>a</em>|<em>b</em></span>, if there exists some integer <em>c</em> such that <em>b</em> = <em>ac</em>. We write <span class="math inline"><em>a</em> ∤ <em>b</em></span> to indicate that <em>b</em> is not divisible by <em>a</em>.</p>
+</blockquote>
+<p>From definition <a href="#quote:def1" data-reference-type="ref" data-reference="quote:def1">[quote:def1]</a> the following hold for integers a, b and c. <br /><span class="math display"><em>a</em>|0, 1|<em>a</em>, <em>a</em>|<em>a</em></span><br /></p>
+<p>A divides zero can be gathered quite easily from looking at it. <br /><span class="math display">$$a|0 = \frac{a}{0} = 0 \
+    0 = a \cdot 0,$$</span><br /> which holds for all <em>a</em>.</p>
+<blockquote>
+<p><strong>Definition 2</strong>: Let <em>a</em> and <em>b</em> be given integers, with at least one of them different from zero. The <em>greatest common divisor</em> of <em>a</em> and <em>b</em>, denoted gcd(a,b) is the positive integer <em>d</em> satisfying the following:<br />
+</p>
+<ul>
+<li><p><span class="math inline"><em>d</em>|<em>a</em></span> and <span class="math inline"><em>d</em>|<em>b</em></span></p></li>
+<li><p>if <span class="math inline"><em>c</em>|<em>a</em></span> and <span class="math inline"><em>c</em>|<em>b</em></span> then c <span class="math inline">≤</span> d</p></li>
+</ul>
+</blockquote>
+<p>Given the integers <em>a</em> and <em>b</em>, we say that the two integers a and b are <em>relatively prime</em> if gcd(a,b) = 1, meaning the only common divisor both integers have is 1.</p>
+<h1 class="unnumbered" id="the-division-algorithm">The Division Algorithm</h1>
+<blockquote>
+<p><span id="teor:da" label="teor:da">[teor:da]</span> <strong>Theorem 1</strong> Given integers <em>a</em> and <em>b</em>, with <em>b</em> <span class="math inline">&gt;</span> 0, there exists unique integers <em>q</em> and <em>r</em> satisfying</p>
+<p><br /><span class="math display"><em>a</em> = <em>q</em><em>b</em> + <em>r</em>   0 ≤ <em>r</em> &lt; <em>b</em></span><br /></p>
+</blockquote>
+<p>Stating that there exists integers <em>q</em> and <em>r</em>, called <em>quotient</em> and <em>remainder</em>, respectively in the division of a by b.</p>
+<h1 class="unnumbered" id="euclids-algorithm">Euclids Algorithm</h1>
+<p>Let <em>a</em> and <em>b</em> be two integers. We know that</p>
+<p><br /><span class="math display"><em>g</em><em>c</em><em>d</em>(|<em>a</em>|,|<em>b</em>|) = <em>g</em><em>c</em><em>d</em>(<em>a</em>, <em>b</em>),</span><br /> and as such, can assume a and b to be positive integers. If the division algorithm <a href="#teor:da" data-reference-type="ref" data-reference="teor:da">[teor:da]</a> is applied to a and b</p>
+<p><br /><span class="math display"><em>a</em> = <em>q</em><sub>1</sub><em>b</em> + <em>r</em><sub>1</sub>   0 ≤ <em>r</em><sub>1</sub> &lt; <em>b</em></span><br /> If <span class="math inline"><em>r</em><sub>1</sub></span> is zero, the algorithm stops because <span class="math inline"><em>b</em>|<em>a</em></span> and gcd(a,b) would be b. If <span class="math inline"><em>r</em><sub>1</sub> ≠ 0</span>, we follow the next step of the algorithm by moving b to the place of a in the previous step <br /><span class="math display"><em>b</em> = <em>q</em><sub>2</sub><em>r</em><sub>1</sub> + <em>r</em><sub>2</sub>   0 ≤ <em>r</em><sub>2</sub> &lt; <em>r</em><sub>1</sub></span><br /> If the remainder <span class="math inline"><em>r</em><sub>2</sub></span> is zero, we stop and the result of the algorithm is <span class="math inline"><em>r</em><sub>1</sub></span>, i.e., gcd(a,b) = <span class="math inline"><em>r</em><sub>1</sub></span>. If not, the next step is</p>
+<p><br /><span class="math display"><em>r</em><sub>1</sub> = <em>q</em><sub>3</sub><em>r</em><sub>2</sub> + <em>r</em><sub>3</sub>   0 ≤ <em>r</em><sub>3</sub> &lt; <em>r</em><sub>2</sub></span><br /> We can continue in this manner until we reach a zero remainder. When we reach zero we can say that the last non-zero remainder is equal to the gcd(a,b). If the remainder <span class="math inline"><em>r</em><sub><em>n</em></sub></span> is zero, this would correspond to <span class="math inline"><em>r</em><sub><em>n</em> − 1</sub></span> being the gcd(a,b).</p>
+<h1 class="unnumbered" id="bézouts-identity">Bézouts Identity</h1>
+<p>Bézouts states that the gcd of two number can be expressed as a linear combination of both numbers</p>
+<blockquote>
+<p><span id="teor:bez" label="teor:bez">[teor:bez]</span> <strong>Theorem 2</strong> If <strong>a</strong> and <em>b</em> are positive integers, then there exists integers <em>s</em> and <em>t</em> such that gcd(a,b) = <em>sa</em> + <em>tb</em>. The integers <em>s</em> and <em>t</em> are called <em>Bézout coeffiients</em>.</p>
+</blockquote>
+<h1 class="unnumbered" id="congruence">Congruence</h1>
+<h1 class="unnumbered" id="euclids-extended-algorithm">Euclids Extended Algorithm</h1>
+<h1 class="unnumbered" id="large-primes">Large Primes</h1>
+<blockquote>
+<p><strong>Theorem 3</strong> Every positive integer n &gt; 1 is either a prime or a product of primes; this representation is unique, apart from the order in which the factor occur.</p>
+</blockquote>
+<p>called <em>the fundamental theorem of arithmetic</em>.</p>
+<p>A corollary from the fundamental theorem of arithmetic is that</p>
+<blockquote>
+<p>Any positive integer n <span class="math inline">&gt;</span> 0 can be written uniquely in a <em>cannonical form</em> <br /><span class="math display"><em>n</em> = <em>p</em><sub>1</sub><sup><em>k</em>1</sup><em>p</em><sub>2</sub><sup><em>k</em>2</sup><em>p</em><sub>3</sub><sup><em>k</em>3</sup>...<em>p</em><sub><em>r</em></sub><sup><em>k</em><em>r</em></sup>,</span><br /> where for i = 1,2,3... r, each <span class="math inline"><em>k</em><sub><em>i</em></sub></span> is a positive integer and each <span class="math inline"><em>p</em><sub><em>i</em></sub></span> is a prime, with <span class="math inline"><em>p</em><sub>1</sub> &lt; <em>p</em><sub>2</sub> &lt; <em>p</em><sub>3</sub>... &lt; <em>p</em><sub><em>r</em></sub></span>.</p>
+</blockquote>
+<p>If we allow for zero exponents, this gives us another way to calculate the gcd. Given <br /><span class="math display"><em>a</em> = <em>p</em><sub>1</sub><sup><em>k</em>1</sup><em>p</em><sub>2</sub><sup><em>k</em>2</sup><em>p</em><sub>3</sub><sup><em>k</em>3</sup>...<em>p</em><sub><em>n</em></sub><sup><em>k</em><em>m</em></sup></span><br /> and <br /><span class="math display"><em>b</em> = <em>p</em><sub>1</sub><sup><em>j</em>1</sup><em>p</em><sub>2</sub><sup><em>j</em>2</sup><em>p</em><sub>3</sub><sup><em>j</em>3</sup>...<em>p</em><sub><em>n</em></sub><sup><em>j</em><em>n</em></sup>,</span><br /> then <br /><span class="math display"><em>g</em><em>c</em><em>d</em>(<em>a</em>, <em>b</em>) = <em>p</em><sub>1</sub><sup><em>r</em>1</sup><em>p</em><sub>2</sub><sup><em>r</em>2</sup><em>p</em><sub>3</sub><sup><em>r</em>3</sup>...<em>p</em><sub><em>n</em></sub><sup><em>r</em><em>n</em></sup>,</span><br /> where <span class="math inline"><em>r</em><sub><em>i</em></sub></span> = min(<span class="math inline"><em>k</em><sub><em>i</em></sub>, <em>j</em><sub><em>i</em></sub></span>).</p>
+<h2 class="unnumbered" id="sieve-of-eratosthenes">Sieve of Eratosthenes</h2>
+<h2 class="unnumbered" id="fermats-little-theorem">Fermats little theorem</h2>
+<h1 class="unnumbered" id="impliations-and-uses">Impliations and Uses</h1>
+</body>
+</html>
